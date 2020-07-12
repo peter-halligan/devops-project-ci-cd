@@ -1,9 +1,18 @@
 pipeline {
-    agent { label 'master' }
+    agent {
+        docker {
+            image 'python3.7.3-stretch
+        }
+    }
     stages {
+        stage('setup'){
+            steps {
+                make install
+            }
+        }
         stage('build') {
             steps {
-                echo "Hello World!"
+                make lint
             }
         }
     }
