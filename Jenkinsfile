@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'python3.7.3-stretch
+            image 'python3.7.3-stretch'
         }
     }
     stages {
