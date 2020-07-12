@@ -1,0 +1,22 @@
+[
+    {
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "capstone-project"
+    },
+    {
+        "ParameterKey": "CIDR",
+        "ParameterValue": "172.0.0.0/16"
+    },
+    {
+        "ParameterKey": "PublicSubnet1CIDR",
+        "ParameterValue": "172.0.1.0/24"
+    },
+    {
+        "ParameterKey": "MyIP",
+        "ParameterValue": "80.62.116.234/32"
+    },
+    {
+        "ParameterKey": "ImageID",
+        "ParameterValue": "ami-04c87e3354934dc3d"
+    }
+]
