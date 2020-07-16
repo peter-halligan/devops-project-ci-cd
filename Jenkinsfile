@@ -1,18 +1,15 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.7-stretch'
-        }
-    }
+    agent any
     stages {
         stage('setup'){
             steps {
-                make install
+                sh "make setup"
+                sh "source ~/.devops/bin/activate && make install"
             }
         }
-        stage('build') {
+        stage('lint') {
             steps {
-                make lint
+                sh "source ~/.devops/bin/activate && make lint"
             }
         }
     }
