@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    registry = "phalligan/capstone-test
+    registry = "phalligan/capstone-test"
     version = "0.0.0"
     }
     stages {
