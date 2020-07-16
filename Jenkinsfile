@@ -21,6 +21,7 @@ pipeline {
                 script {
                      docker.build registry + ":$version.$BUILD_NUMBER"
                 }
+                docker image ls
             }
         }
     }
