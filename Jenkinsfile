@@ -17,8 +17,10 @@ pipeline {
             }
         }
         stage('build') {
-            script {
-                 docker.build registry + ":$version.$BUILD_NUMBER"
+            steps {
+                script {
+                     docker.build registry + ":$version.$BUILD_NUMBER"
+                }
             }
         }
     }
