@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    registry = "872354405661.dkr.ecr.us-west-2.amazonaws.com/capstone-project"
+    registry = "https://872354405661.dkr.ecr.us-west-2.amazonaws.com/capstone-project"
     version = "0.0.0"
     }
     stages {
