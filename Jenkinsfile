@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    registry = "phalligan/capstone-test"
+    registry = "872354405661.dkr.ecr.us-west-2.amazonaws.com/capstone-project"
     version = "0.0.0"
     }
     stages {
@@ -18,11 +18,16 @@ pipeline {
         }
         stage('build') {
             steps {
-                script {
-                     docker.build registry + ":$version.$BUILD_NUMBER"
+                docker.withRegistry("${env.registry}", "ecr:us-west-2:aws-jenkins-role") {
+          
+                    //build image
+                    def customImage = docker.build("${env.registry}:${env.version}.${BUILD_NUMBER}")
+
+                    //push image
+                    customImage.push()
+
                 }
-                sh 'docker image ls'
-                sh "aws s3 ls"
+
             }
         }
 
