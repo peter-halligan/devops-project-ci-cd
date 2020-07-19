@@ -18,16 +18,17 @@ pipeline {
         }
         stage('build') {
             steps {
-                docker.withRegistry("${env.registry}", "ecr:us-west-2:aws-jenkins-role") {
-          
-                    //build image
-                    def customImage = docker.build("${env.registry}:${env.version}.${BUILD_NUMBER}")
+                script {
+                    docker.withRegistry("${env.registry}", "ecr:us-west-2:aws-jenkins-role") {
+                    
+                        //build image
+                        def customImage = docker.build("${env.registry}:${env.version}.${BUILD_NUMBER}")
 
-                    //push image
-                    customImage.push()
+                        //push image
+                        customImage.push()
 
+                    }
                 }
-
             }
         }
 
