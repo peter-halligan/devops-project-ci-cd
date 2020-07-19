@@ -22,7 +22,9 @@ pipeline {
                      docker.build registry + ":$version.$BUILD_NUMBER"
                 }
                 sh 'docker image ls'
+                sh "aws s3 ls"
             }
         }
+
     }
 }
