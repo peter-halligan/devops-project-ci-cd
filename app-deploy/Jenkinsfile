@@ -8,6 +8,7 @@ pipeline {
         stage('setup'){
             steps {
                 // TODO add stuff here
+                sh "chmod +x -R ${env.WORKSPACE}"
                 echo "here"
             }
         }
@@ -17,7 +18,7 @@ pipeline {
                 dir("app-deploy"){
                     sh "pwd"
                     sh "ls -al"
-                    sh "chmod +X ./deploy.sh && ./deploy.sh"
+                    sh "./deploy.sh"
                     sh "aws --version"
                 }
             }
