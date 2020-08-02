@@ -12,6 +12,7 @@ pipeline {
             }
         }
         stage('build') {
+            dir("app-deploy")
             steps {
                 sh "pwd"
                 sh "ls -al"
