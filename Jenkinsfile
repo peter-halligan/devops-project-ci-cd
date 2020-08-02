@@ -22,7 +22,7 @@ pipeline {
                     docker.withRegistry("${env.registry}", "ecr:us-west-2:aws-jenkins-role") {
                     
                         //build image
-                        def customImage = docker.build("capstone-project:${env.version}.${BUILD_NUMBER}")
+                        def customImage = docker.build("capstone-project:${env.version}")
 
                         //push image
                         customImage.push()
