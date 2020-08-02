@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    environment {
+    registry = "https://872354405661.dkr.ecr.us-west-2.amazonaws.com"
+    version = "0.0.0"
+    }
+    stages {
+        stage('setup'){
+            steps {
+                # TODO add stuff here
+                echo "here"
+            }
+        }
+        stage('build') {
+            steps {
+                sh "./deploy.sh"
+                sh "aws --version"
+            }
+        }
+
+    }
+}
