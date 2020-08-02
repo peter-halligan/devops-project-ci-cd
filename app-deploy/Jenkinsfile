@@ -12,12 +12,14 @@ pipeline {
             }
         }
         stage('build') {
-            dir("app-deploy")
+
             steps {
-                sh "pwd"
-                sh "ls -al"
-                sh "./deploy.sh"
-                sh "aws --version"
+                dir("app-deploy"){
+                    sh "pwd"
+                    sh "ls -al"
+                    sh "./deploy.sh"
+                    sh "aws --version"
+                }
             }
         }
 
