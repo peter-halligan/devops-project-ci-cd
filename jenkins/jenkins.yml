@@ -98,11 +98,11 @@ Resources:
       - IpProtocol: tcp
         FromPort: 8080
         ToPort: 8080
-        CidrIp: 80.62.116.234/32
+        CidrIp: !Ref MyIP
       - IpProtocol: tcp
         FromPort: 22
         ToPort: 22
-        CidrIp: 80.62.116.234/32
+        CidrIp: !Ref MyIP
       SecurityGroupEgress:
       - IpProtocol: tcp
         FromPort: 0
@@ -121,25 +121,25 @@ Resources:
         NetworkInterfaces: 
             - GroupSet: 
                 - Ref: "JenkinsSG"
-              AssociatePublicIpAddress: "true"
+              AssociatePublicIpAddress: true
               DeviceIndex: "0"
-              DeleteOnTermination: "true"
+              DeleteOnTermination: true
               SubnetId: 
                   Ref: "PublicSubnet1"
-        IamInstanceProfile: !Ref ProfileS3ReadOnlyEC2
+        IamInstanceProfile: !Ref ProfileEKSJenkins
         UserData:
             Fn::Base64: !Sub |
                 #!/bin/bash
                 service jenkins start
                 chkconfig jenkins on
           
-  ProfileS3ReadOnlyEC2:
+  ProfileEKSJenkins:
     Type: AWS::IAM::InstanceProfile
     Properties: 
       Roles:
-        - !Ref UdacityS3ReadOnlyEC2Role
+        - !Ref ProfileJenkinsAllRole
   
-  UdacityS3ReadOnlyEC2Role:
+  ProfileJenkinsAllRole:
     Type: AWS::IAM::Role
     Properties: 
       AssumeRolePolicyDocument: 
@@ -153,15 +153,15 @@ Resources:
               - 'sts:AssumeRole'
       Path: /
       Description: Role to allow reading from bucket
-      RoleName: UdacityS3ReadOnlyEC2Role
+      RoleName: ProfileJenkinsAllRole
       Tags: 
         - Key: env
           Value: !Ref EnvironmentName
   
-  ReadFRomBucketPolicy:
+  JenkinsAllPolicy:
     Type: AWS::IAM::Policy
     Properties:
-      PolicyName: ReadFromProjectS3Bucket
+      PolicyName: JenkinsAllPolicy
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -169,9 +169,16 @@ Resources:
             Action:
               - "s3:Get*"
               - "s3:List*"
+              - "iam:*"
+              - "s3:*"
+              - "ecs:*"
+              - "cloudformation:*"
+              - "ec2:*"
+              - "ecr:*"
+              - "eks:*"
             Resource: '*'
       Roles:
-        - !Ref UdacityS3ReadOnlyEC2Role
+        - !Ref ProfileJenkinsAllRole
 
 Outputs:
   # outputs that can be used for the future deployment of ssh bastions
