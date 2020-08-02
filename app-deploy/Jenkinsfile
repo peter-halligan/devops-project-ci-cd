@@ -13,6 +13,8 @@ pipeline {
         }
         stage('build') {
             steps {
+                sh "pwd"
+                sh "ls -al"
                 sh "./deploy.sh"
                 sh "aws --version"
             }
