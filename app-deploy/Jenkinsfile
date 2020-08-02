@@ -17,7 +17,7 @@ pipeline {
                 dir("app-deploy"){
                     sh "pwd"
                     sh "ls -al"
-                    sh "./deploy.sh"
+                    sh "chmod +X ./deploy.sh && ./deploy.sh"
                     sh "aws --version"
                 }
             }
