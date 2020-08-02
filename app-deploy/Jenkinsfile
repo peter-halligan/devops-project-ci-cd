@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('setup'){
             steps {
-                # TODO add stuff here
+                // TODO add stuff here
                 echo "here"
             }
         }
