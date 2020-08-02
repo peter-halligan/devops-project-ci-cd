@@ -1,0 +1,24 @@
+{
+    "builders": [
+      {
+        "type": "amazon-ebs",
+        "access_key": "AWS_ACCESS_KEY",
+        "secret_key": "AWS_ACCESS_SECRET",
+        "region": "us-west-2",
+        "source_ami": "ami-0873b46c45c11058d",
+        "instance_type": "t2.micro",
+        "ssh_username": "ec2-user",
+        "ami_name": "packer-example {{timestamp}}",
+        "ssh_agent_auth": "false"
+      }
+    ],
+    "provisioners": [{
+        "type": "shell",
+        "inline": "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
+    },
+    {
+        "type": "shell",
+        "script": "setup.sh"
+    }
+    ]
+  }
