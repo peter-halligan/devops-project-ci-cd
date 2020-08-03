@@ -2,7 +2,6 @@
 
 which kubectl
 
-kubectl --version
 
 kubectl apply -f namespace.yml
 
