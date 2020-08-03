@@ -1,14 +1,15 @@
 #!/bin/bash
 
 which kubectl
-aws eks --region us-west-2 update-kubeconfig --name dev
+
+kubectl --version
 
 kubectl apply -f namespace.yml
 
-kubectl apply -f deployment.yml
+# kubectl apply -f deployment.yml
 
-kubectl get deployments
+# kubectl get deployments
 
-kubectl apply -f service.yml
+# kubectl apply -f service.yml
 
-kubectl get pods -o wide
+# kubectl get pods -o wide
