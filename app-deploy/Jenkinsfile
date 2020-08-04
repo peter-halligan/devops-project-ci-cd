@@ -16,10 +16,13 @@ pipeline {
 
             steps {
                 dir("app-deploy"){
-                    sh "pwd"
-                    sh "ls -al"
-                    sh "./deploy.sh"
-                    sh "aws --version"
+                    withAWS(credentials:'aws-jenkins-role') {
+                        // do something
+                        sh 'aws eks --region us-west-2 update-kubeconfig --name develop'
+                        
+                        sh "./deploy.sh"
+                    }
+
                 }
             }
         }
